@@ -108,20 +108,23 @@ if __name__ == "__main__":
         Telegram.TELETHON_CLIENT.loop.run_until_complete(notify_restart(Config.RESTART_NOTIFY_ID))
     
     if Config.USE_PYROGRAM:
-        LOGGER.info("🔶Starting Pyrogram Bot")
-        import time  # הוסף שורה זו כדי לייבא את המודול time
-        time.sleep(5)  # המתן 5 שניות לפני שמתחברים
+    LOGGER.info("🔶Starting Pyrogram Bot")
+    import time
+    time.sleep(5)  # המתן 5 שניות לפני שמתחברים
+    try:
         pyrogram_bot = Telegram.PYROGRAM_CLIENT.start()  # התחברות פשוטה
         LOGGER.info(f'✅Pyrogram Session For @{pyrogram_bot.get_me().username} Started Successfully!✅')
-    else:
-        LOGGER.info("🔶Not Starting Pyrogram bot")
+    except Exception as e:
+        LOGGER.info(f"❗Error while starting Pyrogram Bot: {e}")  # לוג של השגיאה האולי תוכן לקבל
+else:
+    LOGGER.info("🔶Not Starting Pyrogram bot")
 
-    if Telegram.TELETHON_USER_CLIENT:
-        start_user_account()
-    else:
-        LOGGER.info("🔶Not Starting User Session")
+if Telegram.TELETHON_USER_CLIENT:
+    start_user_account()
+else:
+    LOGGER.info("🔶Not Starting User Session")
     
-    start_listener()
+start_listener()
     
     if exists("commands.txt") and Config.AUTO_SET_BOT_CMDS:
         Telegram.TELETHON_CLIENT.loop.run_until_complete(set_bot_commands("commands.txt"))
