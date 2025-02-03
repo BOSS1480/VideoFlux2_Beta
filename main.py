@@ -109,11 +109,13 @@ if __name__ == "__main__":
     
     if Config.USE_PYROGRAM:
         LOGGER.info("🔶Starting Pyrogram Bot")
-        pyrogram_bot = Telegram.PYROGRAM_CLIENT.start()  # קריאה פשוטה להתחבר
+        import time  # הוסף שורה זו כדי לייבא את המודול time
+        time.sleep(5)  # המתן 5 שניות לפני שמתחברים
+        pyrogram_bot = Telegram.PYROGRAM_CLIENT.start()  # התחברות פשוטה
         LOGGER.info(f'✅Pyrogram Session For @{pyrogram_bot.get_me().username} Started Successfully!✅')
     else:
         LOGGER.info("🔶Not Starting Pyrogram bot")
-    
+
     if Telegram.TELETHON_USER_CLIENT:
         start_user_account()
     else:
