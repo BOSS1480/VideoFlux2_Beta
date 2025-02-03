@@ -101,25 +101,31 @@ if __name__ == "__main__":
     Telegram.TELETHON_CLIENT.start(bot_token=Config.TOKEN)
     telethob_bot = Telegram.TELETHON_CLIENT.loop.run_until_complete(get_me(Telegram.TELETHON_CLIENT))
     LOGGER.info("🔶Checking For Restart Notification")
+    
     if exists(".restartmsg"):
         Telegram.TELETHON_CLIENT.loop.run_until_complete(check_restart(".restartmsg"))
     elif Config.RESTART_NOTIFY_ID:
         Telegram.TELETHON_CLIENT.loop.run_until_complete(notify_restart(Config.RESTART_NOTIFY_ID))
+    
     if Config.USE_PYROGRAM:
         LOGGER.info("🔶Starting Pyrogram Bot")
-        pyrogram_bot = Telegram.PYROGRAM_CLIENT.start()
+        pyrogram_bot = Telegram.PYROGRAM_CLIENT.start()  # קריאה פשוטה להתחבר
         LOGGER.info(f'✅Pyrogram Session For @{pyrogram_bot.get_me().username} Started Successfully!✅')
     else:
         LOGGER.info("🔶Not Starting Pyrogram bot")
+    
     if Telegram.TELETHON_USER_CLIENT:
         start_user_account()
     else:
         LOGGER.info("🔶Not Starting User Session")
+    
     start_listener()
+    
     if exists("commands.txt") and Config.AUTO_SET_BOT_CMDS:
         Telegram.TELETHON_CLIENT.loop.run_until_complete(set_bot_commands("commands.txt"))
     else:
         LOGGER.info("🔶Not Setting Up Bot Commands")
+    
     LOGGER.info(f'✅@{telethob_bot.username} Started Successfully!✅')
     LOGGER.info(f"⚡Bot By Sahil Nolia⚡")
     Telegram.TELETHON_CLIENT.run_until_disconnected()
