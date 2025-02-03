@@ -1,10 +1,10 @@
 FROM python:3.9
 
-# הוסף כאן את הגדרת אזור הזמן לפני התקנת חבילות
+# Set timezone to UTC
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=UTC  # הגדר את אזור הזמן ל-UTC
+ENV TZ=UTC
 
-RUN apt -qq update && apt -qq install -y ffmpeg wget unzip p7zip-full curl busybox aria2 tzdata  # הוסף את 'tzdata' לרשימת החבילות
+RUN apt -qq update && apt -qq install -y ffmpeg wget unzip p7zip-full curl busybox aria2 tzdata
 
 COPY . /app
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN bash install.sh
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-ENV PORT=8000  # תיקנתי: מסירים רווחים מסביב ל-=
+ENV PORT=8000
 EXPOSE 8000
 
 CMD sh start.sh
