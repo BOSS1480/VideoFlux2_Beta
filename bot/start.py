@@ -698,10 +698,10 @@ async def _speed_test(event):
 ###############------Start_Message------###############
 @TELETHON_CLIENT.on(events.NewMessage(incoming=True, pattern='/start'))
 async def _startmsg(event):
-    text = f"Hi {get_mention(event)}, I Am Alive."
+    text = f"היי {get_mention(event)}, אני חי 🌟."
     await event.reply(text, buttons=[
-    [Button.url('⭐ Bot By 𝚂𝚊𝚑𝚒𝚕 ⭐', 'https://t.me/nik66')],
-    [Button.url('❤ Join Channel ❤', 'https://t.me/nik66x')]
+    [Button.url('⭐ לקבוצה שלי ⭐', 'https://t.me/+ZN82e3fcGUwzNTM8')],
+    [Button.url('❤ ערוץ עדכונים ❤', 'https://t.me/bot_sratim_sdarot')]
 ])
     return
 
