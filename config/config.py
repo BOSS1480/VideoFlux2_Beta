@@ -92,7 +92,7 @@ class Config:
     UNFINISHED_PROGRESS_STR = environ.get("UNFINISHED_PROGRESS_STR", '□')
     TIMEZONE = environ.get("TIMEZONE", 'Asia/Jerusalem')
     try:
-        AUTH_GROUP_ID = "-1002382439894"
+        AUTH_GROUP_ID = int(environ.get("AUTH_GROUP_ID","-1002382439894"))
     except:
         LOGGER.info("🔶Auth Group ID Not Found, Pyrogram Download and Upload Will Not Work In Group")
         AUTH_GROUP_ID = False
